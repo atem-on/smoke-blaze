@@ -1,19 +1,40 @@
-// @ts-check
-import { test, expect } from '@playwright/test';
+const { test, expect } = require('@playwright/test');
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Demoblaze smoke tests', () => {
+  test('homepage loads and shows products', async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+    await expect(page).toHaveTitle(/STORE/);
+    await expect(page.getByText('CATEGORIES')).toBeVisible();
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+    const productLinks = page.locator('#tbodyid .hrefch');
+    await expect(productLinks.first()).toBeVisible();
+    await expect(productLinks).toHaveCount(9);
+  });
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  test('user can open a product and add it to cart', async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+    const productLink = page.locator('#tbodyid .hrefch').first();
+    await expect(productLink).toBeVisible();
+    await productLink.click();
+    await page.waitForURL(/prod\.html/);
+
+    const productTitle = page.locator('h2').first();
+    await expect(productTitle).toBeVisible();
+
+    const addToCartButton = page.locator('a[onclick*="addToCart"]').first();
+    await expect(addToCartButton).toBeVisible();
+
+    page.once('dialog', async (dialog) => {
+      await expect(dialog.message()).toBe('Product added');
+      await dialog.accept();
+    });
+
+    await addToCartButton.click();
+
+    await page.getByRole('link', { name: 'Cart', exact: true }).click();
+    await expect(page).toHaveURL(/cart\.html/);
+    await expect(page.getByText('Products')).toBeVisible();
+  });
 });
