@@ -12,8 +12,6 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const authFile = 'playwright/.auth/user.json';
-
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -44,7 +42,7 @@ export default defineConfig({
     {
       name: 'chromium',
       dependencies: ['setup'],
-      use: { ...devices['Desktop Chrome'], storageState: authFile },
+      use: { ...devices['Desktop Chrome'] },
     },
 
     // {
