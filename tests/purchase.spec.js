@@ -7,8 +7,16 @@ import {
   parsePurchaseAmount,
 } from './utils';
 
+function getPurchaseStorageState(browserName) {
+  return `playwright/.auth/purchase-user-${browserName}.json`;
+}
+
 test.describe('Demoblaze purchase flow', () => {
-  test.use({ storageState: 'playwright/.auth/purchase-user.json' });
+  test.use({
+    storageState: async ({ browserName }, use) => {
+      await use(getPurchaseStorageState(browserName));
+    },
+  });
 
   test('user can add a product to cart and complete purchase', async ({ page }) => {
     const productName = 'Samsung galaxy s6';
