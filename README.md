@@ -44,7 +44,7 @@ npx playwright test --project=chromium
 - `tests/` - Playwright test files
 - `playwright.config.js` - Playwright configuration
 - `playwright/.auth/` - generated auth state for authenticated tests
-- `utils.js` - helpoer file that includes functions used by tests
+- `utils.js` - helper file that includes functions used by tests
 
 ## Useful commands
 
