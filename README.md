@@ -56,7 +56,13 @@ npx playwright show-report
 
 ## What is tested
 
-Test names tell what is tested. 
+    - authenticated user is loaded from storage state
+    - homepage loads and shows products
+    - all categories show products
+    - contact form can send a message
+    - user can open a product and add it to cart
+    - user can add a product to cart and complete purchase
+
 All tests are run by default with chromium, firefox and webkit(safari).
 
 ## How tests are constructed
