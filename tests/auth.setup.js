@@ -5,6 +5,7 @@ const purchaseAuthFile = 'playwright/.auth/purchase-user.json';
 
 async function createAndLoginUser(page, username, password) {
   await page.goto('/');
+  await expect(page.locator('#nameofuser')).toBeHidden();
   await page.getByRole('link', { name: 'Sign up', exact: true }).click();
 
   await expect(page.locator('#signInModal')).toBeVisible();

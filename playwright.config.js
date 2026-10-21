@@ -45,17 +45,17 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   dependencies: ['setup'],
-    //   use: { ...devices['Desktop Firefox'], storageState: authFile },
-    // },
+    {
+      name: 'firefox',
+      dependencies: ['setup'],
+      use: { ...devices['Desktop Firefox'] },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   dependencies: ['setup'],
-    //   use: { ...devices['Desktop Safari'], storageState: authFile },
-    // },
+    {
+      name: 'webkit',
+      dependencies: ['setup'],
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
