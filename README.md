@@ -56,7 +56,8 @@ npx playwright show-report
 
 ## What is tested
 
-Test names tell what is tested
+Test names tell what is tested. 
+All tests are run by default with chromium, firefox and webkit(safari).
 
 ## How tests are constructed
 
