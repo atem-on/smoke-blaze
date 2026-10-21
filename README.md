@@ -33,12 +33,6 @@ npx playwright test --ui
 ```
 UI mode enables to run tests also without auth setup. On upper left corner click projects text and untick setup. You can also toggle used browser from this menu.
 
-Run a specific file:
-
-```bash
-npx playwright test tests/smoke.spec.js
-```
-
 Run a specific browser project:
 
 ```bash
